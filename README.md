@@ -1,2 +1,6 @@
-# Industrial-Robotics-Assignment-2
-The github repo for the Spring 2023 Industrial Robotics Lab Assignment 2. Group Members: Alexander Dickson, Zahead Rashidi, Mostafa Rahimi.
+#  UTS-IR-SnC-Project-Spring2023
+The github repo is for the combined Industrial Robotics and Sensors & Control Group Projects
+Group Members in Industrial Robotics are:
+Alexander Dickson, 
+Zahead Rashidi,
+Mostafa Rahimi.
