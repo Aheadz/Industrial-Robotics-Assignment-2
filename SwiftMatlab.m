@@ -21,7 +21,6 @@ for i = 1:length(q_matrix)
     % Publish the message
     send(jointStatePub, jointStateMsg);
     r1.model.animate(q_matrix(i,:));
-    drawnow();
 end
 % Shut down the ROS node
 rosshutdown;
