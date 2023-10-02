@@ -6,7 +6,7 @@ jointStatePub = rospublisher('/joint_states', 'sensor_msgs/JointState');
 jointStateMsg = rosmessage(jointStatePub);
 
 r1 = UR5;
-r1.model.base = transl(0,0,0);
+r1.model.base = transl(0,0,1);
 
 q1 = [0,-pi/2,0,0,0,0];
 q2 = r1.model.ikine(transl(-0.6,-0.5,0.3),'q0',q1);
