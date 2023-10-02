@@ -10,7 +10,7 @@ function printer_id = printerState()
 
 
     % Wait until the boolean is true
-    while ((~print_end) && (printer_id == 0))
+    while ((~print_end) | (printer_id == 0))
         pause(0.1); % Pause for a short time to prevent excessive CPU usage
     end
 
@@ -23,4 +23,8 @@ function printer_id = printerState()
         % Callback function to handle received integer array messages
         printer_id = message.Data;
     end
+end
+
+function updatePrinterStatus(printer_id)
+
 end
