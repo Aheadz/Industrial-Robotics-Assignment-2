@@ -27,7 +27,7 @@ BinR(location{6});
 BinL(location{7});
 BinL(location{8});
 
-LinearUR3(transl(0.75,1,1.324));
+%LinearUR3(transl(0.75,1,1.324));
 % UR3e(transl(-1.25,1,1.324));
 
 axis equal
