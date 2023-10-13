@@ -9,6 +9,7 @@ classdef ur3e < RobotBaseClass
         homePose = SE3(0,0,0);
         elbowUpQ = [0,0,0,0,0,0];
         jointLimits = [0,0,0,0,0,0];
+        jointStatePub = rospublisher('/tm5_joint_state', 'sensor_msgs/JointState');
     end
 
     methods
@@ -47,7 +48,7 @@ classdef ur3e < RobotBaseClass
              
             self.model = SerialLink(link,'name',self.name);
         end
-        
+%%Custom Functions start Here
         function self = setHomePose(self,pose)
             self.homePose = pose;
         end
@@ -92,7 +93,12 @@ classdef ur3e < RobotBaseClass
 
     methods (Access = private)
         function publish_joint_state(self,Q)
-            
+            jointStateMsg = rosmessage(self.jointStatePub);
+            jointStateMsg.Name = {'UR3e'};
+            jointStateMsg.Position = Q; % Example values
+            jointStateMsg.Velocity = zeros(1,6); % Example values
+            jointStateMsg.Effort = zeros(1,6); % Example values
+            send(self.jointStatePub,jointStateMsg);
         end
     end
 end

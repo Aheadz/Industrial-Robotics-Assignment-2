@@ -109,7 +109,7 @@ tm5_1.home();
 
 logger(logPub,['Printer #' num2str(printer_id) ' Is Now Ready for printing again']);
 
-%updatePrinterStatus(printer_id);
+updatePrinterStatus(printer_id);
 
 
 rosshutdown

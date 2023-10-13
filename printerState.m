@@ -24,7 +24,3 @@ function printer_id = printerState()
         printer_id = message.Data;
     end
 end
-
-function updatePrinterStatus(printer_id)
-
-end
