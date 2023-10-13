@@ -28,7 +28,7 @@ classdef LinearUR3 < RobotBaseClass
             link(6) = Link('d',0.08535,'a',0,'alpha',-pi/2,'qlim',deg2rad([-360,360]), 'offset',0);
             link(7) = Link('d',0.0819,'a',0,'alpha',0,'qlim',deg2rad([-360,360]), 'offset', 0);
 
-
+            % 
             % ur3d = [0.1519, 0, 0, 0.11235, 0.08535, 0.0819];
             % ur3a = [0, -0.24365, -0.21325, 0, 0, 0];
             % ur3alpha = [(90*pi)/180, (0*pi)/180, (0*pi)/180, (90*pi)/180, (-90*pi)/180, (0*pi)/180];
@@ -41,8 +41,7 @@ classdef LinearUR3 < RobotBaseClass
             link(1).qlim = [-0.8 -0.01];
             
             self.model = SerialLink(link,'name',self.name);
-            
-
+                       
         end
      
     end
