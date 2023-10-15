@@ -19,7 +19,7 @@ classdef tm5 < RobotBaseClass
                 if nargin == 2
                     error('If you set useTool you must pass in the toolFilename as well');
                 elseif nargin == 0 % Nothing passed
-                    baseTr = transl(0,0,0);  
+                    baseTr = transl(0,0,0)*trotx(pi/2);  
                 end             
             else % All passed in 
                 self.useTool = useTool;
@@ -36,13 +36,17 @@ classdef tm5 < RobotBaseClass
         end
         %Model Creation
         function CreateModel(self)
-            link(1) = Link('d',0.089159,    'a',0,      'alpha',pi/2,'offset',0,'qlim',[deg2rad(-360),deg2rad(360)]);
-            link(2) = Link('d',0,         'a',-0.425,  'alpha',0,'offset',0,'qlim',[deg2rad(-90),deg2rad(90)]);
-            link(3) = Link('d',0,         'a',-0.39225,'alpha',0,'offset',0,'qlim',[deg2rad(-170),deg2rad(170)]);
-            link(4) = Link('d',0.10915,     'a',0,      'alpha',pi/2,'offset',0,'qlim',[deg2rad(-360),deg2rad(360)]);
-            link(5) = Link('d',0.09465,     'a',0,      'alpha',-pi/2,'offset',0,'qlim',[deg2rad(-360),deg2rad(360)]);
-            link(6) = Link('d',0.0823,     'a',0,      'alpha',0,'offset',0,'qlim',[deg2rad(-360),deg2rad(360)]);           
-            self.model = SerialLink(link,'name',self.name);            
+            link(1) = Link([pi     0       0       pi/2    1]);
+            link(2) = Link('d',0.1452,'a',0,'alpha',-pi/2,'qlim',deg2rad([-270, 270]), 'offset',0);
+            link(3) = Link('d',0,'a',.329,'alpha',0,'qlim', deg2rad([-180, 180]), 'offset',0);
+            link(4) = Link('d',0,'a', .3115,'alpha',0,'qlim', deg2rad([-180, 180]), 'offset', 0);
+            link(5) = Link('d',0.106,'a',0,'alpha',pi/2,'qlim',deg2rad([-180, 180]),'offset', 0);
+            link(6) = Link('d',.106,'a',0,'alpha',pi/2,'qlim',deg2rad([-180, 180]), 'offset',0);
+            link(7) = Link('d',.1144,'a',0,'alpha',0,'qlim',deg2rad([-270, 270]), 'offset', 0);
+
+            link(1).qlim = [-0.8 -0.01];
+             
+            self.model = SerialLink(link,'name',self.name);          
         end 
         
         function self = setHomePose(self,pose)
