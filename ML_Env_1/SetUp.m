@@ -34,21 +34,22 @@ PlaceObject('BinL.ply',location{8});
 % Printer(location{10});
 % Printer(location{11});
 
-P1_Shell = PlaceObject('PrintLink0.ply', location{9});
-P1_BedMover = PlaceObject('PrintLink1.ply', location{9});
-P1_Bed = PlaceObject('PrintLink2.ply', location{9});
-P1_Printer = PlaceObject('PrintLink3.ply', location{9});
+% P1_Shell = PlaceObject('PrintLink0.ply', location{9});
+% P1_BedMover = PlaceObject('PrintLink1.ply', location{9});
+% P1_Bed = PlaceObject('PrintLink2.ply', location{9});
+% P1_Printer = PlaceObject('PrintLink3.ply', location{9});
+% 
+% P2_Shell = PlaceObject('PrintLink0.ply', location{10});
+% P2_BedMover = PlaceObject('PrintLink1.ply', location{10});
+% P2_Bed = PlaceObject('PrintLink2.ply', location{10});
+% P2_Printer = PlaceObject('PrintLink3.ply', location{10});
+% 
+% P3_Shell = PlaceObject('PrintLink0.ply', location{11});
+% P3_BedMover = PlaceObject('PrintLink1.ply', location{11});
+% P3_Bed = PlaceObject('PrintLink2.ply', location{11});
+% P3_Printer = PlaceObject('PrintLink3.ply', location{11});
 
-P2_Shell = PlaceObject('PrintLink0.ply', location{10});
-P2_BedMover = PlaceObject('PrintLink1.ply', location{10});
-P2_Bed = PlaceObject('PrintLink2.ply', location{10});
-P2_Printer = PlaceObject('PrintLink3.ply', location{10});
-
-P3_Shell = PlaceObject('PrintLink0.ply', location{11});
-P3_BedMover = PlaceObject('PrintLink1.ply', location{11});
-P3_Bed = PlaceObject('PrintLink2.ply', location{11});
-P3_Printer = PlaceObject('PrintLink3.ply', location{11});
-
-LinearUR3(transl(0.75,1,1.324));
+tm5(transl(0.75,1,1.324));
+% LinearUR3(0.75,1,1.324));
 
 axis equal
