@@ -37,9 +37,11 @@ ur3e_jointLimit =[0,0,0,0,0,0];
 
 
 %Initialize Environment
-env();
+SetUp();
 logger(logPub,'Environment Initialized');
 
+
+LinearUR3(transl(0.75,1,1.324));
 %Initialize Robots
 tm5_1 = tm5;
 tm5_1.setHomePose(tm5_homePose);
@@ -109,7 +111,7 @@ tm5_1.home();
 
 logger(logPub,['Printer #' num2str(printer_id) ' Is Now Ready for printing again']);
 
-%updatePrinterStatus(printer_id);
+updatePrinterStatus(printer_id);
 
 
 rosshutdown
