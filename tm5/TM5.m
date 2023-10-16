@@ -1,4 +1,4 @@
-classdef tm5 < RobotBaseClass
+classdef TM5 < RobotBaseClass
 
 %% Attributes
     properties(Access = public)   
@@ -9,15 +9,19 @@ classdef tm5 < RobotBaseClass
         homePose = SE3(0,0,0);
         elbowUpQ = [0,0,0,0,0,0];
         jointLimits = [0,0,0,0,0,0];
-        jointStatePub = rospublisher('/tm5_joint_state', 'sensor_msgs/JointState');
+        %jointStatePub = rospublisher('/tm5_joint_state', 'sensor_msgs/JointState');
     end
 
-    methods
+    methods(Access = public)
         %% Constructor
         function self = TM5(baseTr,useTool,toolFilename)
+            self.CreateModel();
             if nargin < 3
                 if nargin == 2
                     error('If you set useTool you must pass in the toolFilename as well');
+                elseif nargin == 1
+                    %Passed in a base translation location
+                    baseTr = baseTr *trotx(pi/2);
                 elseif nargin == 0 % Nothing passed
                     baseTr = transl(0,0,0)*trotx(pi/2);  
                 end             
@@ -27,12 +31,9 @@ classdef tm5 < RobotBaseClass
                 self.toolTr = toolTrData.tool;
                 self.toolFilename = [toolFilename,'.ply'];
             end
-          
-            self.CreateModel();
-			self.model.base = self.model.base.T * baseTr;
-            %self.model.tool = self.toolTr;
-            %self.PlotAndColourRobot();
-            %drawnow
+            self.model.base = self.model.base.T * baseTr;
+            self.model.tool = self.toolTr;
+            self.PlotAndColourRobot();
         end
         %Model Creation
         function CreateModel(self)

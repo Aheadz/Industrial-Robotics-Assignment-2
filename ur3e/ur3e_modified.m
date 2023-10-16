@@ -1,4 +1,4 @@
-classdef ur3e < RobotBaseClass
+classdef ur3e_modified < RobotBaseClass
     %% UR3e Universal Robot 3kg payload robot model
 
     properties(Access = public)   
@@ -14,10 +14,13 @@ classdef ur3e < RobotBaseClass
 
     methods
 %% Constructor
-        function self = UR3e(baseTr,useTool,toolFilename)
+        function self = ur3e_modified(baseTr,useTool,toolFilename)
             if nargin < 3
                 if nargin == 2
                     error('If you set useTool you must pass in the toolFilename as well');
+                elseif nargin == 1
+                    %Passed in a base translation location
+                    baseTr = baseTr;
                 elseif nargin == 0 % Nothing passed
                     baseTr = transl(0,0,0);  
                 end             
@@ -31,10 +34,8 @@ classdef ur3e < RobotBaseClass
             self.CreateModel();
 			self.model.base = self.model.base.T * baseTr;
             self.model.tool = self.toolTr;
-			warning('The DH parameters are correct. But as of July 2023 the ply files for this UR3e model are definitely incorrect, since we are using the UR3 ply files renamed as UR3e. Once replaced remove this warning.')  
+			%warning('The DH parameters are correct. But as of July 2023 the ply files for this UR3e model are definitely incorrect, since we are using the UR3 ply files renamed as UR3e. Once replaced remove this warning.')  
             self.PlotAndColourRobot();
-
-            drawnow
         end
 
 %% CreateModel

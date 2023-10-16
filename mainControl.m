@@ -26,12 +26,12 @@ object_bin_allocation = [1,2,3,4];
 
 
 tm5_homePose = SE3(eye(4) * transl(0,0,0));
-tm5_base = transl(0,0,0);
+tm5_base = transl(1.5,1,1.324) * trotz(pi/2);
 tm5_elbowPos =[0,0,0,0,0,0];
 tm5_jointLimit =[0,0,0,0,0,0];
 
 ur3e_homePose = SE3(eye(4) * transl(0,0,0));
-ur3e_base = transl(0,0,0);
+ur3e_base = transl(-0.75,1,1.343);
 ur3e_elbowPos = [0,0,0,0,0,0];
 ur3e_jointLimit =[0,0,0,0,0,0];
 
@@ -41,19 +41,18 @@ SetUp();
 logger(logPub,'Environment Initialized');
 
 
-LinearUR3(transl(0.75,1,1.324));
 %Initialize Robots
-tm5_1 = tm5;
+tm5_1 = TM5(tm5_base);
 tm5_1.setHomePose(tm5_homePose);
-tm5_1.model.base = tm5_base;
 tm5_1.setElbowPos(tm5_elbowPos);
 tm5_1.setJointLimits(tm5_jointLimit);
 
-ur3e_1 = ur3e;
+ur3e_1 = ur3e_modified(ur3e_base);
 ur3e_1.setHomePose(ur3e_homePose);
-ur3e_1.model.base = ur3e_base;
 %ue3e_1.setElbowPos(ur3e_elbowPos);
 ur3e_1.setJointLimits(ur3e_jointLimit);
+
+axis equal;
 
 %Check Printer Status
 printer_id = printerState();
@@ -113,12 +112,4 @@ logger(logPub,['Printer #' num2str(printer_id) ' Is Now Ready for printing again
 
 updatePrinterStatus(printer_id);
 
-
 rosshutdown
-
-
-function logger(publisher,str)
-    logMsg = rosmessage(publisher);
-    logMsg.Data = str;
-    send(publisher, logMsg);
-end

@@ -1,6 +1,3 @@
-clear;
-clc;
-
 location = {
             [0,0,0]
             [1.25,1,0.324] %Bench_Omran %BECAUSE OF ROTATION OF Z THIS ONE HAS NEGATIVE BUT IT IS [1.25,1,0.324]
@@ -18,18 +15,24 @@ location = {
             
            }; 
 
-PlaceObject('Garage.ply',location{1});
+PlaceObject('Garage.PLY',location{1});
 hold on
 
-PlaceObject('Bench.ply',location{2});
-PlaceObject('Bench.ply',location{3});
-PlaceObject('WBench.ply',location{4});
+PlaceObject('Bench.PLY',location{2});
+PlaceObject('Bench.PLY',location{3});
+PlaceObject('WBench.PLY',location{4});
 
 PlaceObject('BinR.ply',location{5});
 PlaceObject('BinR.ply',location{6});
 PlaceObject('BinL.ply',location{7});
 PlaceObject('BinL.ply',location{8});
 
+
+printer_1 = printerSpawn(location{9});
+printer_2 = printerSpawn(location{10});
+printer_3 = printerSpawn(location{11});
+
+% 
 % Printer(location{9});
 % Printer(location{10});
 % Printer(location{11});
@@ -48,8 +51,3 @@ PlaceObject('BinL.ply',location{8});
 % P3_BedMover = PlaceObject('PrintLink1.ply', location{11});
 % P3_Bed = PlaceObject('PrintLink2.ply', location{11});
 % P3_Printer = PlaceObject('PrintLink3.ply', location{11});
-
-tm5(transl(0.75,1,1.324));
-% LinearUR3(0.75,1,1.324));
-
-axis equal
