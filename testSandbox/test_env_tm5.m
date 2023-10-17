@@ -1,7 +1,7 @@
 location = {
             [0,0,0]
-            [1.25,1,0.324] %Bench_Omran %BECAUSE OF ROTATION OF Z THIS ONE HAS NEGATIVE BUT IT IS [1.25,1,0.324]
-            [1.25,2,0.324]   %Bench_Print
+            [0,0,0] %Bench_Omran %BECAUSE OF ROTATION OF Z THIS ONE HAS NEGATIVE BUT IT IS [1.25,1,0.324]
+            [0,1.25,0]   %Bench_Print
             [-1.25,1,0.324]  %Bench_UR3E
 
             [-0.5,0.603,1.445] %Bench_UR3E_BinR1
@@ -16,3 +16,4 @@ location = {
            }; 
 hold on
 PlaceObject('Bench.PLY',location{2});
+PlaceObject('Bench.PLY',location{3})
