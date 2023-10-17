@@ -1,3 +1,3 @@
-function updatePrinterStatus(printer_id)
+function status = updatePrinterStatus(logPub,printer_id)
 
 end

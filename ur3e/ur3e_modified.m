@@ -62,7 +62,7 @@ classdef ur3e_modified < RobotBaseClass
             self.jointLimits = Q;
         end
 
-        function object_poses =  start_scan(self,heights)
+        function object_poses =  start_scan(self)
             %1. There should be a ROS Service call or publish to a ROS 
             % message thatActivates the python script for executing the scan.
             % it can be done completley in python or the movement can be 
@@ -75,7 +75,8 @@ classdef ur3e_modified < RobotBaseClass
             object_poses = zeros(4,4,4);
         end
 
-        function self = sort_objects(poses, bin_allocation, bin_locations)
+        %function self = sort_objects(poses, bin_allocation, bin_locations)
+        function completed = sort_objects(self)
             %we take the object_poses and we get which bin each object will go into.
             %doesnt matter the order as long as they sorted separately.
             %we also get another array of SE3 that include the bin locations.

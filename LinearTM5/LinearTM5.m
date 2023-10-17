@@ -1,4 +1,4 @@
-classdef TM5 < RobotBaseClass
+classdef LinearTM5 < RobotBaseClass
 
 %% Attributes
     properties(Access = public)   
@@ -9,21 +9,21 @@ classdef TM5 < RobotBaseClass
         homePose = SE3(0,0,0);
         elbowUpQ = [0,0,0,0,0,0];
         jointLimits = [0,0,0,0,0,0];
-        %jointStatePub = rospublisher('/tm5_joint_state', 'sensor_msgs/JointState');
+        jointStatePub = rospublisher('/tm5_joint_state', 'sensor_msgs/JointState');
     end
 
     methods(Access = public)
         %% Constructor
-        function self = TM5(baseTr,useTool,toolFilename)
+        function self = LinearTM5(baseTr,useTool,toolFilename)
             self.CreateModel();
             if nargin < 3
                 if nargin == 2
                     error('If you set useTool you must pass in the toolFilename as well');
                 elseif nargin == 1
                     %Passed in a base translation location
-                    baseTr = baseTr *trotx(pi/2);
+                    baseTr = baseTr * trotx(pi/2);
                 elseif nargin == 0 % Nothing passed
-                    baseTr = transl(0,0,0)*trotx(pi/2);  
+                    baseTr = transl(0,0,0) * trotx(pi/2);  
                 end             
             else % All passed in 
                 self.useTool = useTool;
@@ -122,9 +122,9 @@ classdef TM5 < RobotBaseClass
         function self = publish_joint_state(self,Q)
             jointStateMsg = rosmessage(self.jointStatePub);
             jointStateMsg.Name = {'TM5'};
-            jointStateMsg.Position = Q; % Example values
-            jointStateMsg.Velocity = zeros(1,6); % Example values
-            jointStateMsg.Effort = zeros(1,6); % Example values
+            jointStateMsg.Position = Q;
+            jointStateMsg.Velocity = zeros(1,6);
+            jointStateMsg.Effort = zeros(1,6);
             send(self.jointStatePub,jointStateMsg);
         end
     end

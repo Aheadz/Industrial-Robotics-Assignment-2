@@ -8,7 +8,6 @@ from spatialmath.base import *
 from spatialmath.base import sym
 import spatialgeometry as geometry
 import roboticstoolbox as rtb
-from UR5 import UR5
 import swift
 import rospy
 from sensor_msgs.msg import JointState
@@ -38,8 +37,10 @@ def initialize_environment():
     global env, ur5
     env = swift.Swift()
     env.launch(realtime = True)
-    ur5 = UR5()
-    ur5.add_to_env(env)
+    garagePath = '/home/strangelove/Desktop/Spring2023/Auto3DPrintFarm/UTS-IR-SnC-Project-Spring2023/PY_Env_1/Garage.dae'
+    garage = geometry.Mesh(garagePath)
+    env.add(garage)
+
 
 if __name__ == '__main__':
     initialize_environment()
