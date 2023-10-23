@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="printerTable">
+    <link name="base_link">
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://printerTable/meshes/printerTable.dae</uri>
+            <scale>1 1 1</scale> <!-- Adjust as necessary -->
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="base_collision">
+        <geometry>
+          <mesh>
+            <uri>model://printerTable/meshes/printerTable.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>

@@ -37,9 +37,9 @@ def initialize_environment():
     global env, ur5
     env = swift.Swift()
     env.launch(realtime = True)
-    garagePath = '/home/strangelove/Desktop/Spring2023/Auto3DPrintFarm/UTS-IR-SnC-Project-Spring2023/PY_Env_1/Garage.dae'
-    garage = geometry.Mesh(garagePath)
-    env.add(garage)
+    printbedPath = '/home/strangelove/Desktop/Spring2023/Auto3DPrintFarm/UTS-IR-SnC-Project-Spring2023/gazeboModels/printBedTextured.dae'
+    printbed = geometry.Mesh(printbedPath)
+    env.add(printbed)
 
 
 if __name__ == '__main__':

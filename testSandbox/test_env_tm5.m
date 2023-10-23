@@ -9,7 +9,7 @@ location = {
             [-0.5,1.397,1.445] %Bench_UR3E_BinL1
             [-1,1.397,1.445] %Bench_UR3E_BinL2
 
-            [0.5,2,1.343]   %Bench_Print_Printer1
+            [0,1.0,1.0]   %Bench_Print_Printer1
             [1.25,2,1.343]   %Bench_Print_Printer2
             [2,2,1.343]   %Bench_Print_Printer3
             
@@ -17,3 +17,4 @@ location = {
 hold on
 PlaceObject('Bench.PLY',location{2});
 PlaceObject('Bench.PLY',location{3})
+printer_1 = printerSpawn(location{9});
