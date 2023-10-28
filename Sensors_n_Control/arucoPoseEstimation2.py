@@ -37,18 +37,10 @@ class ArucoPoseEstimator:
         # Create an ArUco dictionary
         self.aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_4X4_250)
         self.parameters = aruco.DetectorParameters_create()
-
-        # Derived camera parameters from Gazebo information
-        w = 640
-        h = 480
-        theta = 1.089
-        fx = w / (2 * np.tan(theta / 2))
-        fy = w / (2 * np.tan(theta / 2))
-        cx = w/2
-        cy = h/2
-        self.distortion_coeffs = np.array([0.0, 0.0, 0.0, 0.0])  # Assuming no distortion
         
-        #Real Camera
+        w = 640
+        h = 480  
+        #Simulation Camera has same intrinsic parameters as Real camera
         fx = 596.66585835
         fy = 591.17132116
         cx = 279.03751085
