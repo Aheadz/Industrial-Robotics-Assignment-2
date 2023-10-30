@@ -32,7 +32,7 @@ class ArucoPoseEstimator:
         self.distortion_coeffs = self.distortion_coeffs.reshape(-1)  # Flatten to 1D array
         
         # Check if using a simulated camera
-        self.simulated_camera = rospy.get_param('~simulated_camera', False)
+        self.simulated_camera = rospy.get_param('~simulated_camera', True)
         
         # Create an ArUco dictionary
         self.aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_4X4_250)
@@ -68,7 +68,10 @@ class ArucoPoseEstimator:
         # Create a CvBridge to convert ROS image messages to OpenCV images
         self.bridge = CvBridge()
         # Subscribe to the camera image topic
-        self.image_sub = rospy.Subscriber("/usb_cam/image_raw", Image, self.callback)
+        if (self.simulated_camera):
+            self.image_sub = rospy.Subscriber("/image_raw", Image, self.callback)
+        else:
+            self.image_sub = rospy.Subscriber("/usb_cam/image_raw", Image, self.callback)
         self.pose_pub = rospy.Publisher("/aruco_tags/pose",PoseStamped, queue_size=1000)
         self.sequenceNum = 0
         

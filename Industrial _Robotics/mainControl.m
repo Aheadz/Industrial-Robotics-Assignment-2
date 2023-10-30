@@ -39,7 +39,7 @@ ur3e_jointLimit =[0,0,0,0,0,0];
 
 
 %Initialize Environment
-%SetUp();
+SetUp();
 logger(logPub,'Environment Initialized');
 
 
