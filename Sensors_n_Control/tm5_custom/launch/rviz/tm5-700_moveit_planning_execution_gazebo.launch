@@ -18,7 +18,7 @@
 
   <!-- The planning and execution components of MoveIt! configured to run -->
   <!-- using the ROS-Industrial interface. -->
-  <rosparam command="load" file="$(find tm5-700-moveit_config)/config/joint_names.yaml"/>
+  <rosparam command="load" file="$(find tm5_custom)/config/joint_names.yaml"/>
  
   <!-- specify the planning pipeline -->
   <arg name="pipeline" default="ompl" />

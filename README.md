@@ -1,6 +1,9 @@
 #  UTS Auto 3D Print Farm Project (Sensors and Control + Industrial Robotics Project) Spring 2023
 ![My Image](logo.png)
 
+
+https://github.com/Aheadz/UTS-IR-SnC-Project-Spring2023/
+
 The github repo is for the combined Industrial Robotics and Sensors & Control Group Projects
 Group Members in Industrial Robotics are:
 - Alexander Dickson, 
@@ -35,7 +38,7 @@ Follow the steps below to install the tm5_custom package:
 
 1. **Install ROS Executable Dependencies:**
     ```bash
-    sudo apt install ros-noetic-industrial-robot-simulator ros-noetic-controller-manager ros-noetic-actionlib ros-noetic-usb-cam
+    sudo apt install ros-noetic-industrial-robot-simulator ros-noetic-controller-manager ros-noetic-actionlib ros-noetic-moveit ros-noetic-usb-cam
     ```
 2. **Setup a ROS Workspace:**
     ```bash
@@ -79,15 +82,33 @@ Follow the steps below to install the tm5_custom package:
      roslaunch tm5_custom tm5-700_gazebo.launch
     ```
 2. **Launch The Moveit! Config:**
+    Launch a new terminal window and go to workspace:
+    ```bash
+    cd ~/tm_ws
+    source devel/setup.bash
+    ```
+    Now launch moveit planning framework:
     ```bash
      roslaunch tm5_custom tm5-700_moveit_planning_execution_gazebo.launch
     ```
-2. **Launch The ARuco Pose Estimation Script:**
+3. **Launch The ARuco Pose Estimation Script:**
+    Launch a new terminal window and go to workspace:
+    ```bash
+    cd ~/tm_ws
+    source devel/setup.bash
+    ```
+    Launch the Aruco Pose Estimation Script:
     ```bash
     rosrun tm5_custom arucoPoseEstimation2.py
     ```
     This should open up a window with the simulated camera feed, The image topic may not be /image_raw in your environment so change if necessary.
-3. **Launch Visual Servoing Script:**
+4. **Launch Visual Servoing Script:**
+    Launch a new terminal window and go to workspace:
+    ```bash
+    cd ~/tm_ws
+    source devel/setup.bash
+    ```
+    Run the visual servoing script and enjoy!
     ```bash
     rosrun tm5_custom attachTool.py
     ```
