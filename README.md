@@ -77,6 +77,7 @@ Follow the steps below to install the tm5_custom package:
     pip3 install opencv-contrib-python==4.5.5.62
     pip3 install opencv-python==4.8.0.76
     pip3 install rospy==1.16
+    pip3 install cv-bridge==1.16.2
     ```
 ## Usage
 1. **Launch The Simulator:**
