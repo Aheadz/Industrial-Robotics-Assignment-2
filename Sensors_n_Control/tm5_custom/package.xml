@@ -30,6 +30,7 @@
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>industrial_robot_simulator</exec_depend>
   <exec_depend>trajectory_msgs</exec_depend>
   <exec_depend>tf</exec_depend>
   <exec_depend>controller_manager</exec_depend>

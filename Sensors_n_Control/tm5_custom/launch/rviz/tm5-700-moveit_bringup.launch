@@ -18,7 +18,7 @@
   -->
 
   <!-- tm common -->
-  <include file="$(find tm5_custom)/rviz/launch/tm_common.launch">
+  <include file="$(find tm5_custom)/launch/rviz/tm_common.launch">
     <arg name="prefix"  value="$(arg prefix)" />
     <arg name="robot_ip" value="$(arg robot_ip)" />
     <arg name="min_payload" value="$(arg min_payload)" />

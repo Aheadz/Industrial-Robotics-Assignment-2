@@ -1,5 +1,14 @@
 <?xml version="1.0"?>
 <launch>
+    
+    
+  <!-- Export env variable so that gazebo finds our models -->
+  <env name="GAZEBO_MODEL_PATH"
+       value="$(find tm5_custom)/gazeboModels:$(optenv GAZEBO_MODEL_PATH)" />
+  <!-- Ignore online database -->
+  <env name="GAZEBO_MODEL_DATABASE_URI"
+       value="/" />
+  
   <arg name="model_name" default="tm5-700"/>
   <arg name="xacro_model" default="tm5-700"/>
   <!-- Robot Pose from [x,y,z,roll,pitch,yaw] --> 

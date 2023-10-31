@@ -163,3 +163,9 @@ install(DIRECTORY include/${PROJECT_NAME}/
 
 install(DIRECTORY config description launch worlds scripts
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+catkin_install_python(PROGRAMS
+  scripts/arucoPoseEstimation2.py
+  scripts/attachTool.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
