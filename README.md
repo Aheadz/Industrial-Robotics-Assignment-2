@@ -21,6 +21,8 @@ Our submission consists of three parts:
 - Code for the UR3e with an attached RGB-D sensor. This is the code that was used for doing the object detection and classification. There is no simulator for testing this code as all testing was done on the real robot.
 - A Python Script for doing automatic ChARuco Camera Calibration used to find the intrinsic parameters of our USB Camera. This Script was modified from https://github.com/nullboundary/CharucoCalibration to work in Python 3 and a more recent version of OpenCV.
 
+Our contribution to the code was distributed evenly (33% per student)
+
 
 ## Prerequisites
 
