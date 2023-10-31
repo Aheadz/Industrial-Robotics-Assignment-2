@@ -94,7 +94,7 @@ Follow the steps below to install the tm5_custom package:
 The Script should begin moving the robot towards a printer based on the ARuco tag Position. The tag detection should also be visible such as here:
 ![My Image](Sensors_n_Control/tm5_custom/simulatedAruco.png)
 
-## UR3e Object Dection & Classification (Selimon Shukurzad)
+## UR3e Object Detection & Classification (Selimon Shukurzad)
 
 The files in the folder "UR3e_Software" contain the main code that was used to perform the object detection and classification along with grasping and sorting functions. The contents of the folder and the purpose of each file is described as follows:
 
