@@ -1,0 +1,32 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/selimon/ur_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/selimon/catkin_ws/devel/include/**",
+        "/home/selimon/catkin_ws/src/pfms-ros/audibot/audibot_gazebo/include/**",
+        "/home/selimon/ur_ws/src/cnn_image_classifier/include/**",
+        "/home/selimon/ur_ws/src/depth_image_processing/include/**",
+        "/home/selimon/ur_ws/src/pointcloud_to_depth_translater/include/**",
+        "/home/selimon/ur_ws/src/robot_control_v2/include/**",
+        "/home/selimon/catkin_ws/src/pfms-ros/sjtu-drone/include/**",
+        "/home/selimon/ur_ws/src/speed_sign/include/**",
+        "/home/selimon/ur_ws/src/Universal_Robots_ROS_Driver/ur_calibration/include/**",
+        "/home/selimon/ur_ws/src/universal_robot/ur_kinematics/include/**",
+        "/home/selimon/ur_ws/src/Universal_Robots_ROS_Driver/ur_robot_driver/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

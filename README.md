@@ -29,7 +29,7 @@ Our submission consists of three parts:
 - Python 3.8.10
 - Laptop with GPU
 
-## Installation
+## TM5 Visual Servoing (Zahead Rashidi)
 
 Follow the steps below to install the tm5_custom package:
 
@@ -91,9 +91,23 @@ Follow the steps below to install the tm5_custom package:
     ```bash
     rosrun tm5_custom attachTool.py
     ```
-    The Script should begin moving the robot towards a printer based on ARuco Position.
+The Script should begin moving the robot towards a printer based on the ARuco tag Position. The tag detection should also be visible such as here:
+![My Image](Sensors_n_Control/tm5_custom/simulatedAruco.png)
 
-## ChAruco Camera Calibration Test
+## UR3e Object Dection & Classification (Selimon Shukurzad)
+
+The files in the folder "UR3e_Software" contain the main code that was used to perform the object detection and classification along with grasping and sorting functions. The contents of the folder and the purpose of each file is described as follows:
+
+**depth_image_processing:**
+- image_to_xyz.cpp: transforms images such that every pixel in the image has a relative position (x,y,z).
+- rgb_image_within_range.cpp: limits the output from the RGB-D sensor such that pixels far away are clipped, so that viewing the top surface of components are easier to detect.
+
+**UR3e_Sensors_n_Control:**
+- UR3e .py Class responsible for controlling the robot with the UR3e
+- RG2 .py Class responsible for controlling the gripper.
+- s_n_c.py: runs all the movements of the robot
+- detecting_circle_or_square_function.py: returns a list to indicate the shape of the object, the centrepoint, the angle, and the radius.
+## ChAruco Camera Calibration (Alexander Dickson)
 
 1. Ensure that you have cloned the repo as per step 3 in the tm5 package install instructions above.
 2. Ensure you have installed the correct python package versions as per step 7 above.
@@ -106,3 +120,6 @@ Follow the steps below to install the tm5_custom package:
    python3 arucoBoard.py  -f calibrated.yml 10.jpg  11.jpg  12.jpg  13.jpg  14.jpg  15.jpg  16.jpg  17.jpg  18.jpg  19.jpg  1.jpg  20.jpg  21.jpg  22.jpg  23.jpg  24.jpg  2.jpg  3.jpg  4.jpg  5.jpg  6.jpg  7.jpg  8.jpg  9.jpg
    ```
 5. Hit Space on each Photograph to progess throught the calibration image set, at the end the intrinsic paramters of the camera are output.
+
+The output should look something like this:
+![My Image](Sensors_n_Control/tm5_custom/../ChArucoCameraCalibration/arucoCalibration.png)
