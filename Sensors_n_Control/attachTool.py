@@ -250,22 +250,23 @@ class RobotController:
             rospy.logerr(f"No pose found for ArUco ID: {aruco_id}")
             return
 
-        # Compute the error
-    
-        #error_x = tag_pose.position.z - 0.03
-        #error_y = 0 - tag_pose.position.x
-        #error_z = 0 - tag_pose.position.y
-        #self.increment_end_effector(0,error_y,error_z,0,0,0)
-        #tag_pose = self.get_aruco_pose(str(aruco_id))
-        error_x = 0 - tag_pose.position.x
-        error_y = 0 - tag_pose.position.y
-        error_z = 0
-        self.increment_end_effector_local(error_x,error_y,error_z,0,0,0)
+        for x in range(5):
+            
+            #Sensor Feedback
+            tag_pose = self.get_aruco_pose(str(aruco_id))
+            
+            #Compute Error
+            error_x = 0 - tag_pose.position.x
+            error_y = 0.08 - tag_pose.position.y
+            error_z = tag_pose.position.z - desired_distance
+            #Plant Process
+            self.increment_end_effector_local(error_x,error_y,error_z,0,0,0)
     
         print("Final Tag Pose Relative to End Efffector")
         print(tag_pose.position)
         
         
+    
         
     def scan_plane(self, top_left, side_length, rpy, step_size):
         
@@ -317,15 +318,15 @@ class RobotController:
 if __name__ == '__main__':
     
     controller = RobotController(group_name='tmr_arm')  # Change to your robot's group name
-    
     homepos = [0, 0, 0, 0 , 0, 0]
-    #scanningStartPos =[math.radians(angle) for angle in [0, -60, 90, -30 , 90, 0]]
-    scanningStartPos = [math.radians(angle) for angle in [180,22, 122, -142 ,90, 0]]
-    #Home Robot
+    scanningStartPos =[math.radians(angle) for angle in [260, 17, -134, 116 , -169, 0]]
     controller.move_to_joint_state(homepos)
     #Start in Scanning Position
     controller.move_to_joint_state(scanningStartPos)
-    controller.process_aruco_data = True 
-    #controller.visual_servo_to_tag(0,0.1)
+    controller.process_aruco_data = True
+    rospy.sleep(5)
+    scanningStartPos =[math.radians(angle) for angle in [260, 21, -128, 107 , -169, 0]]
+    controller.move_to_joint_state(scanningStartPos)
+    controller.visual_servo_to_tag(0,0.1)
     
     rospy.spin()

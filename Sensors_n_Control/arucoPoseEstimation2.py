@@ -21,15 +21,15 @@ class ArucoPoseEstimator:
         rospy.init_node('aruco_pose_estimator', anonymous=True)
         
         # Load camera calibration parameters from .yml file
-        calibration_path = rospy.get_param('~calibration_file', 'calibrated.yml')
-        fs = cv2.FileStorage(calibration_path, cv2.FILE_STORAGE_READ)
+        #calibration_path = rospy.get_param('~calibration_file', 'calibrated.yml')
+        #fs = cv2.FileStorage(calibration_path, cv2.FILE_STORAGE_READ)
         
         # Read the camera matrix
-        self.camera_matrix = np.array(fs.getNode("camera_matrix").mat())
+        #self.camera_matrix = np.array(fs.getNode("camera_matrix").mat())
         
         # Read the distortion coefficients
-        self.distortion_coeffs = np.array(fs.getNode("distortion_coefficients").mat())
-        self.distortion_coeffs = self.distortion_coeffs.reshape(-1)  # Flatten to 1D array
+        #self.distortion_coeffs = np.array(fs.getNode("distortion_coefficients").mat())
+        #.distortion_coeffs = self.distortion_coeffs.reshape(-1)  # Flatten to 1D array
         
         # Check if using a simulated camera
         self.simulated_camera = rospy.get_param('~simulated_camera', True)
@@ -38,9 +38,9 @@ class ArucoPoseEstimator:
         self.aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_4X4_250)
         self.parameters = aruco.DetectorParameters_create()
         
+        #Simulation Camera has same intrinsic parameters as Real camera
         w = 640
         h = 480  
-        #Simulation Camera has same intrinsic parameters as Real camera
         fx = 596.66585835
         fy = 591.17132116
         cx = 279.03751085
