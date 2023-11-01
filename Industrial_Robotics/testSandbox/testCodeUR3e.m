@@ -15,5 +15,7 @@ ur3e_1 = ur3e_modified(ur3e_base);
 ur3e_1.setHomePose(ur3e_homePose);
 %ue3e_1.setElbowPos(ur3e_elbowPos);
 ur3e_1.setJointLimits(ur3e_jointLimit);
-
 axis equal
+ur3e_1.move(pose)
+
+rosshutdown

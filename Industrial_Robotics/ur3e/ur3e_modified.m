@@ -9,7 +9,7 @@ classdef ur3e_modified < RobotBaseClass
         homePose = SE3(0,0,0);
         elbowUpQ = [0,0,0,0,0,0];
         jointLimits = [0,0,0,0,0,0];
-        jointStatePub = rospublisher('/tm5_joint_state', 'sensor_msgs/JointState');
+       % jointStatePub = rospublisher('/tm5_joint_state', 'sensor_msgs/JointState');
     end
 
     methods
@@ -57,7 +57,7 @@ classdef ur3e_modified < RobotBaseClass
         function self = setElbowPos(self,Q)
             self.elbowUpQ = Q;
         end
-
+        
         function self = setJointLimits(self,Q)
             self.jointLimits = Q;
         end
@@ -91,6 +91,18 @@ classdef ur3e_modified < RobotBaseClass
             %We remove anything on the bed and call the check_bed again.
             isBedClear = self.check_bed();
         end
+
+
+        function possible = move(self, pose)
+            %1.RMRC
+            %2.Collision Check for generated trajectory
+            %3.If no collision Then execute
+        end
+
+
+
+
+
     end
 
     methods (Access = private)

@@ -17,8 +17,8 @@ location = {
            }; 
 hold on
 PlaceObject('WBench.PLY',location{1});
-PlaceObject('BinR.ply',location{5});
-PlaceObject('BinR.ply',location{6});
-PlaceObject('BinL.ply',location{7});
-PlaceObject('BinL.ply',location{8});
-PlaceObject('PrintBedFixed.ply',[1,0,1.015]);
+%PlaceObject('BinR.ply',location{5});
+%PlaceObject('BinR.ply',location{6});
+%PlaceObject('BinL.ply',location{7});
+%PlaceObject('BinL.ply',location{8});
+%PlaceObject('PrintBedFixed.ply',[1,0,1.015]);
