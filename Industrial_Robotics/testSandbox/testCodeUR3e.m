@@ -1,6 +1,6 @@
-rosinit
+%rosinit
 
-logPub = rospublisher('/log_info', 'std_msgs/String');
+%logPub = rospublisher('/log_info', 'std_msgs/String');
 
 
 
@@ -18,4 +18,4 @@ ur3e_1.setJointLimits(ur3e_jointLimit);
 axis equal
 ur3e_1.move(pose)
 
-rosshutdown
+%rosshutdown
