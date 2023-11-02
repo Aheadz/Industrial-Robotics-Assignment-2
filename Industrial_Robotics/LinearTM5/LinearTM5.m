@@ -9,7 +9,7 @@ classdef LinearTM5 < RobotBaseClass
         homePose = SE3(0,0,0);
         elbowUpQ = [0,0,0,0,0,0];
         jointLimits = [0,0,0,0,0,0];
-        jointStatePub = rospublisher('/tm5_joint_state', 'sensor_msgs/JointState');
+        %%jointStatePub = rospublisher('/tm5_joint_state', 'sensor_msgs/JointState');
     end
 
     methods(Access = public)
@@ -125,7 +125,7 @@ classdef LinearTM5 < RobotBaseClass
             jointStateMsg.Position = Q;
             jointStateMsg.Velocity = zeros(1,6);
             jointStateMsg.Effort = zeros(1,6);
-            send(self.jointStatePub,jointStateMsg);
+            %%send(self.jointStatePub,jointStateMsg);
         end
     end
 end
