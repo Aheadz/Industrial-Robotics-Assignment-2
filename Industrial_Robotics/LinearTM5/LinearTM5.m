@@ -1,8 +1,9 @@
-classdef LinearTM5 < RobotBaseClass
+classdef LinearTM5 < RobotBaseClass_modified
 
 %% Attributes
     properties(Access = public)   
         plyFileNameStem = 'TM5';
+        maxspeed = [pi pi pi deg2rad(225) deg2rad(225) deg2rad(225)];
     end
 
     properties(Access = private)
@@ -113,6 +114,34 @@ classdef LinearTM5 < RobotBaseClass
 
         function self = home(self)
             %1. Move Back to Home Pose
+        end
+
+        function testMove(self,targetPose,type)
+            switch type
+                case 1
+                    %RMRC General
+
+                case 2
+                    %RMRC No Rotation
+                    qMatrix = self.RMRC_noRot(self,self.model.getpos(),targetPose,0.25,5);
+                case 3
+                    %Trapezoidal ikine
+                    qMatrix = self.trap_ikine(self,self.model.getpos(),0,targetPose,[1 1 1 1 1 1],50);
+                case 4
+                    %Trapezoidal ikcon
+                    qMatrix = self.trap_ikcon(self,self.model.getpos(),0,targetPose,50);
+                case 5
+                    %Quintic ikine
+                    qMatrix = self.quintic_ikine(self,self.model.getpos(),0,targetPose,[1 1 1 1 1 1],50);
+                case 6
+                    %Quintic ikcon
+                    qMatrix = self.quintic_ikcon(self,self.model.getpos(),0,targetPose,50);
+            end
+            for i = 1:length(qMatrix)
+                self.model.animate(qMatrix(i,:))
+                drawnow();
+                pause(0.1);
+            end
         end
     end
 
