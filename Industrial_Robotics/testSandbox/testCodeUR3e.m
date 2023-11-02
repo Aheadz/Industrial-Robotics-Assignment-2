@@ -16,6 +16,15 @@ ur3e_1.setHomePose(ur3e_homePose);
 %ue3e_1.setElbowPos(ur3e_elbowPos);
 ur3e_1.setJointLimits(ur3e_jointLimit);
 axis equal
-ur3e_1.move(pose)
+
+% Example usage:
+q0 = [0, 0, 0, 0, 0, 0];  % Initial joint angles
+targetT = transl(0.5, 0.5, 0.5) * trotx(pi/4) * troty(pi/4);  % Desired SE(3) pose
+targetPose = [targetT(1:3, 4); tr2rpy(targetT)];  % Convert SE(3) pose to position + Euler angles
+dt = 0.1;
+maxIterations = 100;
+
+
+
 
 %rosshutdown
