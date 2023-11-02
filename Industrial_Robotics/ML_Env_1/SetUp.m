@@ -9,9 +9,9 @@ location = {
             [-0.5,1.397,1.445] %Bench_UR3E_BinL1
             [-1,1.397,1.445] %Bench_UR3E_BinL2
 
-            [0.5,2,1.343]   %Bench_Print_Printer1
-            [1.25,2,1.343]   %Bench_Print_Printer2
-            [2,2,1.343]   %Bench_Print_Printer3
+            [0.5,1.85,1.343]   %Bench_Print_Printer1
+            [1.25,1.85,1.343]   %Bench_Print_Printer2
+            [2,1.85,1.343]   %Bench_Print_Printer3
             
            }; 
 
