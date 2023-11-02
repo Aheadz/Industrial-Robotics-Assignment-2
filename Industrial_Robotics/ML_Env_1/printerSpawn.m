@@ -14,7 +14,7 @@ classdef printerSpawn
             self.P_Shell = PlaceObject('PrintLink0.PLY', Location_Printer);
             self.P_BedMover = PlaceObject('PrintLink1.PLY', Location_Printer);
             self.P_Bed = PlaceObject('PrintLink2.PLY', Location_Printer);
-            self.P_Printer = PlaceObject('PrintLink3.PLY', Location_Printer);
+           % self.P_Printer = PlaceObject('PrintLink3.PLY', Location_Printer);
         end
         
         function outputArg = movePrintBed(self,distance)
