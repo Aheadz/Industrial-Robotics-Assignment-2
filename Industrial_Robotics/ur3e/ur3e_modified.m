@@ -24,7 +24,7 @@ classdef ur3e_modified < RobotBaseClass
                     %Passed in a base translation location
                     baseTr = baseTr;
                 elseif nargin == 0 % Nothing passed
-                    baseTr = transl(0,0,0);  
+                    baseTr = transl(-0.75,1,1.343);  
                 end             
             else % All passed in 
                 self.useTool = useTool;
