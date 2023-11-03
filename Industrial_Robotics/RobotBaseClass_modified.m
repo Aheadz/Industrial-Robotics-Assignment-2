@@ -29,8 +29,6 @@ classdef RobotBaseClass_modified < handle
 
         %> Tool transform (only relevant if there is a tool)
         toolTr = transl(0,0,0);
-
-        appAxes
     end
 
     properties (Hidden)
