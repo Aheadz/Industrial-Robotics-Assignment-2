@@ -117,7 +117,7 @@ classdef LinearTM5 < RobotBaseClass_modified
             %1. Move Back to Home Pose
         end
 
-        function testMove(self,targetPose,type)
+        function Move(self,targetPose,type)
             switch type
                 case 1
                     %RMRC General
