@@ -1,83 +1,12 @@
-location = {
-            [0,0,0]
-            [1.25,1,0.324] %Bench_Omran %BECAUSE OF ROTATION OF Z THIS ONE HAS NEGATIVE BUT IT IS [1.25,1,0.324]
-            [1.25,2,0.324]   %Bench_Print
-            [-1.25,1,0.324]  %Bench_UR3E
-
-            [-0.5,0.603,1.445] %Bench_UR3E_BinR1
-            [-1,0.603,1.445] %Bench_UR3E_BinR2
-            [-0.5,1.397,1.445] %Bench_UR3E_BinL1
-            [-1,1.397,1.445] %Bench_UR3E_BinL2
-
-            [0.3,1.85,1.343]   %Bench_Print_Printer1
-            [.9,1.85,1.343]   %Bench_Print_Printer2
-            [1.5,1.85,1.343]   %Bench_Print_Printer3
-            
-           }; 
-
-PlaceObject('Garage.PLY',location{1});
-hold on
-
-PlaceObject('Bench.PLY',location{2});
-PlaceObject('Bench.PLY',location{3});
-PlaceObject('WBench.PLY',location{4});
-
-PlaceObject('BinR.ply',location{5});
-PlaceObject('BinR.ply',location{6});
-PlaceObject('BinL.ply',location{7});
-PlaceObject('BinL.ply',location{8});
-
-
-printer_1 = printerSpawn(location{9});
-printer_2 = printerSpawn(location{10});
-printer_3 = printerSpawn(location{11});
+SetUp();
 
 TM5 = LinearTM5();
 UR3e = ur3e_modified();
-urEndPose = UR3e.model.fkine(UR3e.model.getpos());
-gripL = g_2F85;
-gripR = g_2F85;
-
-gripR.model.base = urEndPose.T*trotx(-pi/2)*trotz(-pi);
-gripL.model.base = urEndPose.T*trotx(pi/2);
-gripL.model.animate([0,0,0]);
-gripR.model.animate([0,0,0]);
-
-pb1 = printBed();
-% pb2 = printBed();
-% pb3 = printBed();
-
-pb1.bedModel{1}.base = transl(.275,1.806,1.354);
-% pb2.bedModel{1}.base = translationmat*transl(location{10});
-% pb3.bedModel{1}.base = translationmat*transl(1.475,1.806,1.354);
-
-pb1.UpdateModel
-% pb2.UpdateModel
-% pb3.UpdateModel
-% 
-% Printer(location{9});
-% Printer(location{10});
-% Printer(location{11});
-
-% P1_Shell = PlaceObject('PrintLink0.ply', location{9});
-% P1_BedMover = PlaceObject('PrintLink1.ply', location{9});
-% P1_Bed = PlaceObject('PrintLink2.ply', location{9});
-% P1_Printer = PlaceObject('PrintLink3.ply', location{9});
-% 
-% P2_Shell = PlaceObject('PrintLink0.ply', location{10});
-% P2_BedMover = PlaceObject('PrintLink1.ply', location{10});
-% P2_Bed = PlaceObject('PrintLink2.ply', location{10});
-% P2_Printer = PlaceObject('PrintLink3.ply', location{10});
-% 
-% P3_Shell = PlaceObject('PrintLink0.ply', location{11});
-% P3_BedMover = PlaceObject('PrintLink1.ply', location{11});
-% P3_Bed = PlaceObject('PrintLink2.ply', location{11});
-% P3_Printer = PlaceObject('PrintLink3.ply', location{11});
 
 trajectory1 = traj1(TM5);
 trajectory2 = traj2(TM5);
-trajectory3 = 0;
-trajectory3,trajectory32 = traj3(TM5,UR3e);
+trajectory3 = traj3(TM5);
+trajectory4 = traj4(UR3e);
 
 
 for i = 1:length(trajectory1)
@@ -124,13 +53,16 @@ function tm5traj = traj2(TM5)
     tm5traj5 = TM5.quintic_ikcon(TM5,TM5.model.getpos(),0,TM5.model.fkine([-0.2000    0.1745   -0.7854    0.5236    0.1745    0.5236    3.1416]),100);
     tm5traj = [tm5traj1;tm5traj2;tm5traj3;tm5traj4;tm5traj5];
 end
-function tm5traj,UR3etraj = traj3(TM5,UR3e);
+function tm5traj = traj3(TM5)
     %Return the TM5 toward the printers, activate the UR3e
     tm5traj1 = TM5.quintic_ikcon(TM5,TM5.model.getpos(),0,TM5.model.fkine([-0.2000    0.1745   -0.7854    0.5236    0.1745    0.5236    3.1416]),200);
+    tm5traj = tm5traj1;
+end
+
+function UR3etraj = traj4(UR3e)
     urtraj1 = UR3e.quintic_ikcon(UR3e,UR3e.model.getpos(),0,UR3e.model.fkine([    2.7837   -0.6363    1.4316    3.8397   -1.5708         0]),100); 
     urtraj2 = UR3e.quintic_ikcon(UR3e,UR3e.model.getpos(),0,UR3e.model.fkine([1.7498   -0.9544    1.3521    3.8397   -1.5708         0]),50);
     urtraj3 = UR3e.quintic_ikcon(UR3e,UR3e.model.getpos(),0,UR3e.model.fkine([3.1416   -1.4316    1.3521    3.8397   -1.5708         0]),50);
     UR3etraj = [urtraj1;urtraj2;urtraj3];
-    tm5traj = tm5traj1;
 end
 
