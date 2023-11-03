@@ -34,7 +34,7 @@ printer_3 = printerSpawn(location{11});
 
 omron = LinearTM5();
 ur = ur3e_modified();
-urEndPose = ur.model.fkine(r.model.getpos());
+urEndPose = ur.model.fkine(ur.model.getpos());
 gripL = g_2F85;
 gripR = g_2F85;
 
@@ -48,7 +48,7 @@ pb2 = printBed();
 pb3 = printBed();
 
 translationmat = eye(4);
-pb1.bedModel{1}.base = translationmat*transl(location{9});
+pb1.bedModel{1}.base = translationmat*transl(1.475,1.806,1.354);
 pb2.bedModel{1}.base = translationmat*transl(location{10});
 pb3.bedModel{1}.base = translationmat*transl(location{11});
 

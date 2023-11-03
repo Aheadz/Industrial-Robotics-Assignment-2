@@ -44,17 +44,16 @@ gripL.model.animate([0,0,0]);
 gripR.model.animate([0,0,0]);
 
 pb1 = printBed();
-pb2 = printBed();
-pb3 = printBed();
+% pb2 = printBed();
+% pb3 = printBed();
 
-translationmat = eye(4);
-pb1.bedModel{1}.base = translationmat*transl(location{9});
-pb2.bedModel{1}.base = translationmat*transl(location{10});
-pb3.bedModel{1}.base = translationmat*transl(location{11});
+pb1.bedModel{1}.base = transl(.275,1.806,1.354);
+% pb2.bedModel{1}.base = translationmat*transl(location{10});
+% pb3.bedModel{1}.base = translationmat*transl(1.475,1.806,1.354);
 
 pb1.UpdateModel
-pb2.UpdateModel
-pb3.UpdateModel
+% pb2.UpdateModel
+% pb3.UpdateModel
 % 
 % Printer(location{9});
 % Printer(location{10});
