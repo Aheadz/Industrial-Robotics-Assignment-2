@@ -32,6 +32,29 @@ printer_1 = printerSpawn(location{9});
 printer_2 = printerSpawn(location{10});
 printer_3 = printerSpawn(location{11});
 
+omron = LinearTM5();
+ur = ur3e_modified();
+urEndPose = ur.model.fkine(r.model.getpos());
+gripL = g_2F85;
+gripR = g_2F85;
+
+gripR.model.base = urEndPose.T*trotx(-pi/2)*trotz(-pi);
+gripL.model.base = urEndPose.T*trotx(pi/2);
+gripL.model.animate([0,0,0]);
+gripR.model.animate([0,0,0]);
+
+pb1 = printBed();
+pb2 = printBed();
+pb3 = printBed();
+
+translationmat = eye(4);
+pb1.bedModel{1}.base = translationmat*transl(location{9});
+pb2.bedModel{1}.base = translationmat*transl(location{10});
+pb3.bedModel{1}.base = translationmat*transl(location{11});
+
+pb1.UpdateModel
+pb2.UpdateModel
+pb3.UpdateModel
 % 
 % Printer(location{9});
 % Printer(location{10});
