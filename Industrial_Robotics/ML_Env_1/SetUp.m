@@ -27,21 +27,33 @@ PlaceObject('BinR.ply',location{6});
 PlaceObject('BinL.ply',location{7});
 PlaceObject('BinL.ply',location{8});
 
+PlaceObject('emergencyStopButton.ply', [2.25,0.75,1.343])
+PlaceObject('emergencyStopButton.ply', [-2.25,0.75,1.343])
 
-printer_1 = printerSpawn(location{9});
-printer_2 = printerSpawn(location{10});
-printer_3 = printerSpawn(location{11});
+PlaceObject('fireExtinguisher.ply', [2.75,0,1.343])
+PlaceObject('fireExtinguisher.ply', [-2.75,0,1.343])
 
-omron = LinearTM5();
-ur = ur3e_modified();
-urEndPose = ur.model.fkine(ur.model.getpos());
-gripL = g_2F85;
-gripR = g_2F85;
+PlaceObject('fireExtinguisher.ply', [2.75,0,1.343])
+PlaceObject('fireExtinguisher.ply', [-2.75,0,1.343])
 
-gripR.model.base = urEndPose.T*trotx(-pi/2)*trotz(-pi);
-gripL.model.base = urEndPose.T*trotx(pi/2);
-gripL.model.animate([0,0,0]);
-gripR.model.animate([0,0,0]);
+PlaceObject('fenceFinals.ply', [0,-1,0.343])
+PlaceObject('fenceFinals.ply', [1.8,-1,0.343])
+PlaceObject('fenceFinals.ply', [-1.8,-1,0.343])
+
+% printer_1 = printerSpawn(location{9});
+% printer_2 = printerSpawn(location{10});
+% printer_3 = printerSpawn(location{11});
+
+% omron = LinearTM5();
+% ur = ur3e_modified();
+% urEndPose = ur.model.fkine(ur.model.getpos());
+% gripL = g_2F85;
+% gripR = g_2F85;
+% 
+% gripR.model.base = urEndPose.T*trotx(-pi/2)*trotz(-pi);
+% gripL.model.base = urEndPose.T*trotx(pi/2);
+% gripL.model.animate([0,0,0]);
+% gripR.model.animate([0,0,0]);
 
 pb1 = printBed();
 % pb2 = printBed();
