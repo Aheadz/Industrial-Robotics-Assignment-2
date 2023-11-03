@@ -29,6 +29,8 @@ classdef RobotBaseClass_modified < handle
 
         %> Tool transform (only relevant if there is a tool)
         toolTr = transl(0,0,0);
+
+        appAxes
     end
 
     properties (Hidden)
@@ -265,8 +267,6 @@ classdef RobotBaseClass_modified < handle
             end
 
         end 
-
-        %Linear RMRC that does change end-effector orientation
         %Linear RMRC that does change end-effector orientation
         function qMatrix = RMRC_noRot(self,r,q0, targetPose, deltaT, time)
             %1.Parameter Setup
@@ -361,12 +361,10 @@ classdef RobotBaseClass_modified < handle
                 end
                 % Cap the joint velocities
                 for j = 1:length(r.maxspeed)
-                    if qdot(j) > r.maxspeed(j)
-                        qdot(j)
-                        qdot(j) = r.maxspeed(j);
+                    if qdot(i,j) > r.maxspeed(j)
+                        qdot(i,j) = r.maxspeed(j);
                     elseif qdot(j) < -r.maxspeed(j)
-                        qdot(j)
-                        qdot(j) = -r.maxspeed(j);
+                        qdot(i,j) = -r.maxspeed(j);
                     end
                 end  
                 %13.Add new joint state to trajectory
