@@ -36,9 +36,9 @@ PlaceObject('fireExtinguisher.ply', [-2.75,0,1.343])
 PlaceObject('fireExtinguisher.ply', [2.75,0,1.343])
 PlaceObject('fireExtinguisher.ply', [-2.75,0,1.343])
 
-PlaceObject('fenceFinal.ply', [0,-1,0.343])
-PlaceObject('fenceFinal.ply', [1.8,-1,0.343])
-PlaceObject('fenceFinal.ply', [-1.8,-1,0.343])
+PlaceObject('fenceFinals.ply', [0,-1,0.343])
+PlaceObject('fenceFinals.ply', [1.8,-1,0.343])
+PlaceObject('fenceFinals.ply', [-1.8,-1,0.343])
 
 % printer_1 = printerSpawn(location{9});
 % printer_2 = printerSpawn(location{10});
