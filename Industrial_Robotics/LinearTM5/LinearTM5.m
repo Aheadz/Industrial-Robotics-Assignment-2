@@ -25,7 +25,7 @@ classdef LinearTM5 < RobotBaseClass_modified
                     baseTr = baseTr * trotx(pi/2);
                 elseif nargin == 0 % Nothing passed
                     %baseTr = transl(0.3,1,1.38)*trotx(pi/2)*troty(-pi/2);  
-                    baseTr = transl(0,0,0)*trotx(pi/2)*troty(-pi/2)
+                    baseTr = transl(0.3,1,1.38)*trotx(pi/2)*troty(-pi/2)
                 end             
             else % All passed in 
                 self.useTool = useTool;
