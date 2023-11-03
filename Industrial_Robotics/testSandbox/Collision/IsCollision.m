@@ -5,6 +5,7 @@
 function result = IsCollision(R,qTraj,faces,vertex,faceNormals,returnOnceFound)
 if nargin < 6
     returnOnceFound = true;
+    
 end
 result = false;
 
@@ -20,6 +21,7 @@ result = false;
                 if check == 1 && IsIntersectionPointInsideTriangle(intersectP,vertex(faces(faceIndex,:)',:))
                     plot3(intersectP(1),intersectP(2),intersectP(3),'r*');
                     display('Intersection');
+                    
                     result = true;
                     if returnOnceFound
                         return
