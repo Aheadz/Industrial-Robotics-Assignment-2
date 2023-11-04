@@ -74,10 +74,10 @@ Follow the steps below to install the tm5_custom package:
     ```
 7. **Install Python Dependencies:**
     ```bash
-    pip3 install opencv-contrib-python==4.5.5.62
-    pip3 install opencv-python==4.8.0.76
-    pip3 install rospy==1.16
-    pip3 install cv-bridge==1.16.2
+    cd ~/UTS-IR-SnC-Project-Spring2023/Sensors_n_Control
+    python3.8 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
     ```
 ## Usage
 1. **Launch The Simulator:**
