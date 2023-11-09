@@ -1,4 +1,4 @@
-classdef LinearTM5 < RobotBaseClass_modified
+classdef LinearTM5 < RobotBaseClass
 
 %% Attributes
     properties(Access = public)   
@@ -12,7 +12,6 @@ classdef LinearTM5 < RobotBaseClass_modified
         jointLimits = [0,0,0,0,0,0];
         %%jointStatePub = rospublisher('/tm5_joint_state', 'sensor_msgs/JointState');
     end
-
     methods(Access = public)
         %% Constructor
         function self = LinearTM5(baseTr,useTool,toolFilename)
@@ -44,8 +43,8 @@ classdef LinearTM5 < RobotBaseClass_modified
             link(3) = Link('d',0,'a',.329,'alpha',0,'qlim', deg2rad([-180, 180]), 'offset',0);
             link(4) = Link('d',0,'a', .3115,'alpha',0,'qlim', deg2rad([-180, 180]), 'offset', 0);
             link(5) = Link('d',0.106,'a',0,'alpha',pi/2,'qlim',deg2rad([-180, 180]),'offset', 0);
-            link(6) = Link('d',.106,'a',0,'alpha',pi/2,'qlim',deg2rad([-180, 180]), 'offset',0);
-            link(7) = Link('d',.1144,'a',0,'alpha',0,'qlim',deg2rad([-270, 270]), 'offset', 0);
+            link(6) = Link('d',0.106,'a',0,'alpha',pi/2,'qlim',deg2rad([-180, 180]), 'offset',0);
+            link(7) = Link('d',0.1144,'a',0,'alpha',0,'qlim',deg2rad([-270, 270]), 'offset', 0);
 
             link(1).qlim = [-0.8 -0.01];
              
@@ -115,34 +114,6 @@ classdef LinearTM5 < RobotBaseClass_modified
 
         function self = home(self)
             %1. Move Back to Home Pose
-        end
-
-        function Move(self,targetPose,type)
-            switch type
-                case 1
-                    %RMRC General
-
-                case 2
-                    %RMRC No Rotation
-                    qMatrix = self.RMRC_noRot(self,self.model.getpos(),targetPose,0.25,5);
-                case 3
-                    %Trapezoidal ikine
-                    qMatrix = self.trap_ikine(self,self.model.getpos(),0,targetPose,[1 1 1 1 1 1],50);
-                case 4
-                    %Trapezoidal ikcon
-                    qMatrix = self.trap_ikcon(self,self.model.getpos(),0,targetPose,50);
-                case 5
-                    %Quintic ikine
-                    qMatrix = self.quintic_ikine(self,self.model.getpos(),0,targetPose,[1 1 1 1 1 1],50);
-                case 6
-                    %Quintic ikcon
-                    qMatrix = self.quintic_ikcon(self,self.model.getpos(),0,targetPose,50);
-            end
-            for i = 1:length(qMatrix)
-                self.model.animate(qMatrix(i,:))
-                drawnow();
-                pause(0.1);
-            end
         end
     end
 
