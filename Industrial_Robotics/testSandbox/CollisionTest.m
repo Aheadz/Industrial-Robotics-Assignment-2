@@ -40,6 +40,7 @@ tr = zeros(4,4,R.model.n+1);
 
 tr(:,:,1) = R.model.base.T;
 
+%Creating transform of each joint link 
 L = R.model.links;
 for i = 1 : R.model.n
     tr(:,:,i+1) = (tr(:,:,i) * trotz(q(i)) * transl(0,0,L(i).d) * transl(L(i).a,0,0) * trotx(L(i).alpha));
@@ -55,10 +56,16 @@ Final = FinalWithNoRot * SE3(trotx(RotInitial(1))* troty(RotInitial(2))* trotz(R
 qI = R.model.ikcon(Initial);
 qF = R.model.ikcon(Final);
 
+%qMatrix of intial joints to the final joints based on the end effector
+%postion
 qTraj = jtraj(qI,qF,steps);
 disp(qTraj)
 
 %%
+%based on the trasnform and the link of the robot that has been generated
+%as well as the faces, vertex and facenormal of an object as ply flie 
+%will check for collision and intesction indicating as follows and the
+%number of detection
 for k = 1:steps
     result(k) = IsCollision(R.model,qTraj(k,:),faces,vertex,faceNormals,false);
     R.model.animate(qTraj(k,:));

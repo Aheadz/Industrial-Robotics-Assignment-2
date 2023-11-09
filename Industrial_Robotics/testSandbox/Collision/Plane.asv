@@ -1,0 +1,48 @@
+function [vertices, faces, faceNormals] = Plane(Vx1, Vy1, Vz1, Vx2, Vy2, Vz2, Vx3, Vy3, Vz3, Vx4, Vy4, Vz4)
+    vertices = [
+        Vx1, Vy1, Vz1;   % Vertex 1: x, y, z
+        Vx2, Vy2, Vz2;   % Vertex 2: x, y, z
+        Vx3, Vy3, Vz3;   % Vertex 3: x, y, z
+        Vx4, Vy4, Vz4    % Vertex 4: x, y, z
+    ];
+
+    % Calculate the faces assuming planar surface (two triangles for a quad)
+    faces = [1, 2, 3; 1, 3, 4];
+
+    % Calculate the normals of the faces (assuming each face has the same normal)
+    vec1 = vertices(2, :) - vertices(1, :);
+    vec2 = vertices(3, :) - vertices(1, :);
+    normal = cross(vec1, vec2);
+    normal = normal / norm(normal);
+
+    faceNormals = [normal; normal]; % Assuming the two faces have the same normal
+
+        % Extract x, y, z coordinates of the vertices
+    x = vertices(:, 1);
+    y = vertices(:, 2);
+    z = vertices(:, 3);
+
+    % Define the grid based on the given vertices
+    xRange = linspace(min(x), max(x), 100);
+    yRange = linspace(min(y), max(y), 100);
+    [xGrid, yGrid] = meshgrid(xRange, yRange);
+
+    % Calculate the plane equation using the input vertices
+    A = [x, y, ones(4, 1)];
+    if rank(A) == 3 % Ensure the matrix is full rank (not rank deficient)
+        coefficients = A\z;
+        zGrid = coefficients(1) * xGrid + coefficients(2) * yGrid + coefficients(3);
+
+        % Plot the red-colored plane
+        figure; % Create a new figure
+        surf(xGrid, yGrid, zGrid, 'FaceColor', 'red', 'EdgeColor', 'none');
+
+        % Set workspace size (change these values as needed)
+        xlim([-2,2]);
+        ylim([-2,2]);
+        zlim([0,2]);
+
+    else
+        disp('The provided vertices are not suitable for defining a plane.');
+    end
+end
