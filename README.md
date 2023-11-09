@@ -79,6 +79,9 @@ Follow the steps below to install the tm5_custom package:
     source venv/bin/activate
     pip install -r requirements.txt
     ```
+    Note:
+    Alternatively you can also check within the scripts to see the versions of the specific packages that have been imported. Most issues encountered when trying to install the scripts on other machines have been related to the OpenCV ARuco module.The location of this module has changed many times across different versions of OpenCV. Sometimes it doesnt run well on computers with both an intel and Nvidia GPU. It seems that it works best on Ubuntu 20.04 distributions running with CPU only mode. The key package version to install is opencv-contrib-python 4.5.5.62.
+   
 ## Usage
 1. **Launch The Simulator:**
     ```bash
