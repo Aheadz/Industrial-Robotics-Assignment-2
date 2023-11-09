@@ -1,4 +1,4 @@
-classdef ur3e_modified < RobotBaseClass_modified
+classdef ur3e_modified < RobotBaseClass
     %% UR3e Universal Robot 3kg payload robot model
 
     properties(Access = public)   
@@ -13,7 +13,6 @@ classdef ur3e_modified < RobotBaseClass_modified
         jointLimits = [0,0,0,0,0,0];
        % jointStatePub = rospublisher('/tm5_joint_state', 'sensor_msgs/JointState');
     end
-
     methods
 %% Constructor
         function self = ur3e_modified(baseTr,useTool,toolFilename)
@@ -93,33 +92,8 @@ classdef ur3e_modified < RobotBaseClass_modified
             %We remove anything on the bed and call the check_bed again.
             isBedClear = self.check_bed();
         end
-        function testMove(self,targetPose,type)
-            switch type
-                case 1
-                    %RMRC General
-                    
-                case 2
-                    %RMRC No Rotation
-                    qMatrix = self.RMRC_noRot(self,self.model.getpos(),targetPose,0.25,5);
-                case 3
-                    %Trapezoidal ikine
-                    qMatrix = self.trap_ikine(self,self.model.getpos(),0,targetPose,[1 1 1 1 1 1],50);
-                case 4
-                    %Trapezoidal ikcon
-                    qMatrix = self.trap_ikcon(self,self.model.getpos(),0,targetPose,50);
-                case 5
-                    %Quintic ikine
-                    qMatrix = self.quintic_ikine(self,self.model.getpos(),0,targetPose,[1 1 1 1 1 1],50);
-                case 6
-                    %Quintic ikcon
-                    qMatrix = self.quintic_ikcon(self,self.model.getpos(),0,targetPose,50);
-            end
-            for i = 1:length(qMatrix)
-                self.model.animate(qMatrix(i,:))
-                drawnow();
-                pause(0.1);
-            end
-        end
+
+        
     end
 
     methods (Access = private)

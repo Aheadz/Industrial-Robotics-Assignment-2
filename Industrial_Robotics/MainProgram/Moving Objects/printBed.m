@@ -1,8 +1,4 @@
-classdef printBed < handle
-    %ROBOTCOWS A class that creates a herd of robot cows
-	%   The cows can be moved around randomly. It is then possible to query
-    %   the current location (base) of the cows.    
-    
+classdef printBed < handle    
     %#ok<*TRYNC>    
 
     properties (Constant)
@@ -11,16 +7,11 @@ classdef printBed < handle
     end
     
     properties
-        %> Number of cows
+        %> Number of beds
         bedCount = 1;
         
         %> A cell structure of \c cowCount cow models
         bedModel;
-        
-        %> paddockSize in meters
-        % paddockSize = [10,10];        
-        
-        %> Dimensions of the workspace in regard to the padoc size
         % workspaceDimensions;
     end
     

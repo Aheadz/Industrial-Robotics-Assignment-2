@@ -74,11 +74,14 @@ Follow the steps below to install the tm5_custom package:
     ```
 7. **Install Python Dependencies:**
     ```bash
-    pip3 install opencv-contrib-python==4.5.5.62
-    pip3 install opencv-python==4.8.0.76
-    pip3 install rospy==1.16
-    pip3 install cv-bridge==1.16.2
+    cd ~/UTS-IR-SnC-Project-Spring2023/Sensors_n_Control
+    python3.8 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
     ```
+    Note:
+    Alternatively you can also check within the scripts to see the versions of the specific packages that have been imported. Most issues encountered when trying to install the scripts on other machines have been related to the OpenCV ARuco module.The location of this module has changed many times across different versions of OpenCV. Sometimes it doesnt run well on computers with both an intel and Nvidia GPU. It seems that it works best on Ubuntu 20.04 distributions running with CPU only mode. The key package version to install is opencv-contrib-python 4.5.5.62.
+   
 ## Usage
 1. **Launch The Simulator:**
     ```bash
