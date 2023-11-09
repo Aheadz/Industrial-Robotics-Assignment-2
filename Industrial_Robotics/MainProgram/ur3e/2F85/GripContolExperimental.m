@@ -6,7 +6,7 @@ g2 = g_2F85;
 g2.model.base = g2.model.base.T*troty(-pi);
 g1.model.animate([0,0,0]);
 g2.model.animate([0,0,0]);
-gripControl(0, g1, g2)
+gripControl(3, g1, g2)
 
 function gripControl(state, g1, g2)
 steps = 100;
@@ -20,7 +20,7 @@ if state == 0;
         g1.model.animate(qTraj(i,:));
         g2.model.animate(qTraj(i,:));
     end
-else state == 1;
+elseif state == 1;
     curPos = g1.model.getpos();
     joint1 = linspace(curPos([1]),0.5,steps)';
     joint2 = linspace(0,0,steps)';
@@ -30,5 +30,7 @@ else state == 1;
         g1.model.animate(qTraj(i,:));
         g2.model.animate(qTraj(i,:));
     end
+else 
+    fprintf('state %d is not valid, this should be 1 or 0/n',state)
 end
 end
