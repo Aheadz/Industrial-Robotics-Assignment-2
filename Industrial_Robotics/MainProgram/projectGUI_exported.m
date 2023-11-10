@@ -120,32 +120,30 @@ classdef projectGUI_exported < matlab.apps.AppBase
                    elseif app.RobotToControlSwitch.Value == "TM5"
                         targetPose = app.tm5_control.r.model.fkine(app.tm5_control.r.model.getpos()) * SE3(transformation);
                    end
-
-
-                   
+     
                    %Trap ikine
-                   if app.TrajectoryGeneratorDropDown == 1
+                   if app.TrajectoryGeneratorDropDown.Value == "Trapezoidal ikine"
                        if app.RobotToControlSwitch.Value == "UR3e"
                            app.qMatrixUR3e = app.ur3e_control.trap_ikine(app.ur3e_control.r.model.getpos(),0,targetPose,[1 1 1 1 1 1],50);
                        elseif app.RobotToControlSwitch.Value == "TM5"
                             app.qMatrixUR3e = app.tm5_control.trap_ikine(app.tm5_control.r.model.getpos(),0,targetPose,[1 1 1 1 1 1],50);
                        end
                    %Trap ikcon
-                   elseif app.TrajectoryGeneratorDropDown == 2
+                   elseif app.TrajectoryGeneratorDropDown.Value == "Trapezoidal ikcon"
                        if app.RobotToControlSwitch.Value == "UR3e"
                            app.qMatrixUR3e = app.ur3e_control.trap_ikcon(app.ur3e_control.r.model.getpos(),0,targetPose,50);
                        elseif app.RobotToControlSwitch.Value == "TM5"
                            app.qMatrixTM5 = app.tm5_control.trap_ikcon(app.tm5_control.r.model.getpos(),0,targetPose,50);
                        end
                    %Quintic ikine
-                   elseif app.TrajectoryGeneratorDropDown == 3
+                   elseif app.TrajectoryGeneratorDropDown.Value == "Quintic ikine"
                        if app.RobotToControlSwitch.Value == "UR3e"
                             app.qMatrixUR3e = app.ur3e_control.quintic_ikine(app.ur3e_control.r.model.getpos(),0,targetPose,[1 1 1 1 1 1],50);
                        elseif app.RobotToControlSwitch.Value == "TM5"
                             app.qMatrixTM5 = app.tm5_control.quintic_ikine(app.tm5_control.r.model.getpos(),0,targetPose,[1 1 1 1 1 1],50);
                        end
                    %Quintic ikcon
-                   elseif app.TrajectoryGeneratorDropDown == 4
+                   elseif app.TrajectoryGeneratorDropDown.Value == "Quintic ikcon"
                        if app.RobotToControlSwitch.Value == "UR3e"
                             app.qMatrixUR3e = app.ur3e_control.quintic_ikcon(app.ur3e_control.r.model.getpos(),0,targetPose,50);
                        elseif app.RobotToControlSwitch.Value == "TM5"
@@ -220,9 +218,13 @@ classdef projectGUI_exported < matlab.apps.AppBase
         % Button pushed function: ResumeButton
         function ResumeButtonPushed(app, event)
             if (app.disengaged)
-                app.tm5_control.estop = false;
-                app.ur3e_control.estop = false;
-                app.ur3e_control.continueTraj();
+                if (app.tm5_control.estop)
+                    app.tm5_control.estop = false;
+                    app.tm5_control.continueTraj();
+                elseif (app.ur3e_control.estop)
+                    app.ur3e_control.estop = false;
+                    app.ur3e_control.continueTraj();
+                end
             end
         end
 
@@ -231,6 +233,7 @@ classdef projectGUI_exported < matlab.apps.AppBase
             app.tm5_control.estop = true;
             app.ur3e_control.estop = true;
             app.disengaged = false;
+            disp("EStop has been triggered!");
         end
 
         % Button pushed function: VzButton
