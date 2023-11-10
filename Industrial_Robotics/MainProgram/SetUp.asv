@@ -58,6 +58,8 @@ PlaceObject('fireExtinguisher.ply', [-2.75,0,1.343])
 % gripL.model.base = urEndPose.T*trotx(pi/2);
 % gripL.model.animate([0,0,0]);
 % gripR.model.animate([0,0,0]);
+omron = LinearTM5();
+ur = ur3e_modified();
 % urEndPose = ur.model.fkine(ur.model.getpos());
 % gripL = g_2F85;
 % gripR = g_2F85;
@@ -102,23 +104,23 @@ for i = 1:m
     end
 end
 
-% %% Animate the movement and light curtain danger detect
-%     manx = linspace(0,0,50)';
-%     many = linspace(-2,0,50)';
-%     manTraj = ([manx,many,manx]);
-% for step = 1:50
-%     man = PlaceObject('WpersonMaleConstruction.ply',manTraj(step,:));
-%     man_Points = get(man, 'Vertices');
-% 
-%     % Check if the man_Points are within 0.1 distance of curtain_Points
-%     if any(min(pdist2(man_Points, curtain_points)) < 0.1)
-%         disp('Man is in the danger!');
-%         disp('EStop has been triggered!');
-%         break; % Break out of the loop if the condition is met
-%     end 
-%     pause(0.1); % Pause to show the update
-%     delete(man)
-% end
+%% Animate the movement and light curtain danger detect
+    manx = linspace(0,0,50)';
+    many = linspace(-2,0,50)';
+    manTraj = ([manx,many,manx]);
+for step = 1:50
+    man = PlaceObject('WpersonMaleConstruction.ply',manTraj(step,:));
+    man_Points = get(man, 'Vertices');
+    
+    % Check if the man_Points are within 0.1 distance of curtain_Points
+    if any(min(pdist2(man_Points, curtain_points)) < 0.1)
+        disp('Man is in the danger!');
+        disp('EStop has been triggered!');
+        break; % Break out of the loop if the condition is met
+    end 
+    pause(0.1); % Pause to show the update
+    delete(man)
+end
 %%
 pb1 = printBed();
 % pb2 = printBed();
