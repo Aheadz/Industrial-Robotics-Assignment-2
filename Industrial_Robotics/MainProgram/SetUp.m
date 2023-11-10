@@ -104,9 +104,6 @@ for i = 1:m
     end
 end
 
-%%
-% man = PlaceObject('WpersonMaleConstruction.ply',[0,-2,0.324]);
-
 %% Animate the movement and light curtain danger detect
     manx = linspace(0,0,50)';
     many = linspace(-2,0,50)';
@@ -118,12 +115,12 @@ for step = 1:50
     % Check if the man_Points are within 0.1 distance of curtain_Points
     if any(min(pdist2(man_Points, curtain_points)) < 0.1)
         disp('Man is in the danger!');
+        disp('EStop has been triggered!');
         break; % Break out of the loop if the condition is met
     end 
     pause(0.1); % Pause to show the update
     delete(man)
 end
-
 %%
 pb1 = printBed();
 % pb2 = printBed();
