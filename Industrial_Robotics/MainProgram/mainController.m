@@ -1,5 +1,3 @@
-
-app = projectGUI_exported;
 SetUp();
 
 tm5 = LinearTM5();
@@ -7,9 +5,14 @@ ur3e = ur3e_modified();
 
 
 tm5_ctrl = robotController(tm5);
-app.setTM5_ctrl(tm5_ctrl);
 ur3e_ctrl = robotController(ur3e);
+
+
+app = projectGUI_exported;
+app.setTM5_ctrl(tm5_ctrl);
 app.setUR3e_ctrl(ur3e_ctrl);
+
+%traj(tm5_ctrl,ur3e_ctrl);
 
 while true
 
