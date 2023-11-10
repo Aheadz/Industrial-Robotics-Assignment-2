@@ -3,7 +3,8 @@ classdef robotController < handle
     %Detailed explanation goes here
     % Public properties can be accessed from outside the class
     properties (Access = public)
-
+        r;
+        estop = false;
     end
     
     % Protected properties can only be accessed from within the class and subclasses
@@ -13,15 +14,16 @@ classdef robotController < handle
     
     % Private properties can only be accessed from within the class
     properties (Access = private)
-        r;
+        current_trajectory;
+        current_position;
+        current_index;
+        l2;
     end
 
     methods
-% Constructor
         function self = robotController(r)
             %Set r to a robot class object
             self.r = r;
-
         end
 %%Trajectory Generation methods
         %Generalized RMRC that will move between pose changing rotation and translation.
@@ -103,8 +105,16 @@ classdef robotController < handle
             end
 
         end 
+        function qMatrix = increment_end_effector(self,q0,dx,dy,dz,wx,wy,wz,deltaT,time)
+           currentPose = self.r.model.fkine(q0);
+           increment_transform = transl(dx,dy,dz) * rpy2tr(deg2rad(wx),deg2rad(wy),deg2rad(wz));
+        
+           targetPose = currentPose * SE3(increment_transform);
+           qMatrix = self.RMRC_noRot(q0,targetPose,deltaT,time);
+        end
         %Linear RMRC that does change end-effector orientation
         function qMatrix = RMRC_noRot(self,q0, targetPose, deltaT, time)
+
             %1.Parameter Setup
             link_length = length(self.r.model.links());
             steps = time/deltaT;
@@ -239,6 +249,7 @@ classdef robotController < handle
             q2 = self.r.model.ikcon(T2,q1);
             qMatrix = jtraj(q1,q2,steps);
         end
+
 %Movement System
         function move(self,targetPose,type)
             switch type
@@ -261,26 +272,53 @@ classdef robotController < handle
                     %Quintic ikcon
                     qMatrix = self.quintic_ikcon(self.r.model.getpos(),0,targetPose,50);
             end
-
             %self.plotTrajectory(qMatrix)
+            self.executeTraj(qMatrix)
+        end
+
+        function executeTraj(self,qMatrix)
+            self.current_trajectory = qMatrix;
             for i = 1:length(qMatrix)
-                self.r.model.animate(qMatrix(i,:))
-                drawnow();
-                pause(0.1);
+                if (self.estop)
+                    self.current_position = qMatrix(i,:);
+                    self.current_index = i;
+                    break;
+                else
+                    self.r.model.animate(qMatrix(i,:));
+                    drawnow();
+                    pause(0.1);
+                end
             end
         end
+
+        function continueTraj(self)
+            qMatrix = self.current_trajectory;
+            for i = self.current_index:length(qMatrix)
+                if (self.estop)
+                    self.current_position = qMatrix(i,:);
+                    self.current_index = i;
+                    break;
+                else
+                    self.r.model.animate(qMatrix(i,:));
+                    drawnow();
+                    pause(0.1);
+                end
+            end
+        end
+
         function plotTrajectory(self,qMatrix)
             pointsMatrix = zeros(length(qMatrix),3);
             for i = 1:length(qMatrix)
                 point = self.r.model.fkine(qMatrix(i,:)).T;
-                pointsMatrix(i,:) = point(1:3,4)'
+                pointsMatrix(i,:) = point(1:3,4)';
             end
             x = pointsMatrix(:,1);
             y = pointsMatrix(:,2);
             z = pointsMatrix(:,3);
-            plot3(x,y,z,'-o');
-            l2 = plot3(x,y,z,'-o','LineWidth', 2);
+            delete(self.l2);
+            self.l2 = plot3(x,y,z,'-o','LineWidth', 2);
         end
+
     end
     
     methods (Access = private)
