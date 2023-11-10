@@ -78,6 +78,7 @@ classdef projectGUI_exported < matlab.apps.AppBase
         ur3e_control;
         qMatrixTM5;
         qMatrixUR3e;
+        disengaged = true;
     end
     
     methods (Access = private)
@@ -120,7 +121,6 @@ classdef projectGUI_exported < matlab.apps.AppBase
                         targetPose = app.tm5_control.r.model.fkine(app.tm5_control.r.model.getpos()) * SE3(transformation);
                    end
 
-                   disp(targetPose);
 
                    
                    %Trap ikine
@@ -214,20 +214,23 @@ classdef projectGUI_exported < matlab.apps.AppBase
 
         % Button pushed function: STARTButton
         function STARTButtonPushed(app, event)
-            
+            curtainTest;
         end
 
         % Button pushed function: ResumeButton
         function ResumeButtonPushed(app, event)
-            app.tm5_control.estop = false;
-            app.ur3e_control.estop = false;
-            app.ur3e_control.continueTraj();
+            if (app.disengaged)
+                app.tm5_control.estop = false;
+                app.ur3e_control.estop = false;
+                app.ur3e_control.continueTraj();
+            end
         end
 
         % Button pushed function: eSTOPButton
         function eSTOPButtonPushed(app, event)
             app.tm5_control.estop = true;
             app.ur3e_control.estop = true;
+            app.disengaged = false;
         end
 
         % Button pushed function: VzButton
@@ -292,7 +295,7 @@ classdef projectGUI_exported < matlab.apps.AppBase
 
         % Button pushed function: DisengageButton
         function DisengageButtonPushed(app, event)
-            
+            app.disengaged = true;
         end
     end
 
