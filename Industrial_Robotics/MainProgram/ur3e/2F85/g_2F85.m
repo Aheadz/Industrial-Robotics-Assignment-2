@@ -21,10 +21,7 @@ function self = g_2F85(baseTr)
         function CreateModel(self)
 %             link(1) = Link('d',0,'a',0.03,'alpha',0,'qlim',deg2rad([-360 360]), 'offset',pi/6); % PRISMATIC Link
 %             link(2) = Link('d',0,'a',0.03,'alpha',0,'qlim',deg2rad([-360 360]), 'offset',pi/4);
-%             link(3) = Link('d',0,'a',0.03,'alpha',0,'qlim', deg2rad([-360 360]), 'offset',pi/4);
-%             
-%             
-%              
+%             link(3) = Link('d',0,'a',0.03,'alpha',0,'qlim', deg2rad([-360 360]), 'offset',pi/4);       
 %             self.model = SerialLink(link,'name',self.name
              
             link(1) = Link([0      0      0.07     0      0]);
