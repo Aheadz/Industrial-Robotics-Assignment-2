@@ -13,10 +13,8 @@ classdef Print < RobotBaseClass
 				baseTr = eye(4);			
             end
             self.model.base = baseTr; 
-            
             self.PlotAndColourRobot();         
         end
-
 %% Create the robot model
         function CreateModel(self)   
             % Create the UR3 model mounted on a linear rail
@@ -29,9 +27,7 @@ classdef Print < RobotBaseClass
             link(2).qlim = [-0.8 -0.01];
             
             self.model = SerialLink(link,'name',self.name);
-
-            % self.model.teach;
-
+            % self.model.teach;s
             axis equal
         end
      

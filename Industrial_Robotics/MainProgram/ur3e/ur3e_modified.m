@@ -50,50 +50,6 @@ classdef ur3e_modified < RobotBaseClass
              
             self.model = SerialLink(link,'name',self.name);
         end
-%%Custom Functions start Here
-        function self = setHomePose(self,pose)
-            self.homePose = pose;
-        end
-
-        function self = setElbowPos(self,Q)
-            self.elbowUpQ = Q;
-        end
-        
-        function self = setJointLimits(self,Q)
-            self.jointLimits = Q;
-        end
-
-        function object_poses =  start_scan(self)
-            %1. There should be a ROS Service call or publish to a ROS 
-            % message thatActivates the python script for executing the scan.
-            % it can be done completley in python or the movement can be 
-            % in MATLAB and the scans can
-            % be done in python and so would the image processing.
-            % no matter the, result must be an SE3 Matrix that gives the 
-            % poses of the objects
-            % at this points the objects will be rectangular blocks of 
-            % different heights
-            object_poses = zeros(4,4,4);
-        end
-
-        %function self = sort_objects(poses, bin_allocation, bin_locations)
-        function completed = sort_objects(self)
-            %we take the object_poses and we get which bin each object will go into.
-            %doesnt matter the order as long as they sorted separately.
-            %we also get another array of SE3 that include the bin locations.
-            %this function can be implemented in python if necessary
-        end
-
-        function isBedClear = check_bed(self)
-            isBedClear = true;
-        end
-
-        function isBedClear = clear_bed(self)
-            %We remove anything on the bed and call the check_bed again.
-            isBedClear = self.check_bed();
-        end
-
-        
     end
 
     methods (Access = private)

@@ -62,59 +62,6 @@ classdef LinearTM5 < RobotBaseClass
         function self = setJointLimits(self,Q)
             self.jointLimits = Q;
         end
-
-        function self = goToPrinter(self,pose)
-            % 1. Move To a Position Where the Tool Can Slot into the bed or attach to it.
-            % 1.1. It is necessary to move in a highly constrained way such that there is no collision with
-            %      the environment.
-            % 2. The pose must line the tool up with the mounting holes in the print bed
-            % self.plot() as you change the joint state.
-            % self.publish_joint_state(q) publish joint states to ROS as you move aswell
-        end
-
-        function self = attachtool(self)
-            %1. Routine needs move in linearly to slot into the bed brace.
-            %2. Should move in nice and slow.
-            % self.plot() as you change the joint state.
-            % self.publish_joint_state(q) publish joint states to ROS as you move aswell
-        end
-
-        function self = removeBed(self)
-            %1. Robot must keep the build plate level whilst also avoiding 
-            % collisions with the printer frame.
-            %2. Should move directly upwards then pull back and then rotate.
-            %3. This step should also be done slowly to minimize reaction forces.
-            % self.plot() as you change the joint state.
-            % self.publish_joint_state(q) publish joint states to ROS as you move aswell
-        end
-
-        function self = moveBed(self,pose)
-            %1. Robot moves to bed.
-            %2. No Movement in the Z-axis is allowed until mountBed() is called.
-            % self.plot() as you change the joint state.
-            % self.publish_joint_state(q) publish joint states to ROS as you 
-            % move aswell
-        end
-
-        function self = mountBed(self,pose)
-            %1. Robot lowers the bed onto the magnetic mount of the UR3e bench
-            % self.plot() as you change the joint state.
-            % self.publish_joint_state(q) publish joint states to ROS as you move
-            %  aswell
-        end
-
-        function self = placeBed(self)
-            %This Function places the bed back onto the printer
-        end
-
-        function self = detach(self)
-            %1. Robot dettaches the end-effector from the bed (basically inverse 
-            % of attach, could make one function?)
-        end
-
-        function self = home(self)
-            %1. Move Back to Home Pose
-        end
     end
 
     % There are many more support methods that could be added here such as those
